@@ -1,5 +1,5 @@
 # symbolic-ai
-A sequence to sequence (seq2seq) model to map mathematical expressions to their Taylor series expansion.
+A sequence to sequence (seq2seq) model to map mathematical expressions to their Taylor series expansion. For July 2021 Carnegie Mellon University hackathon in AI for physics conference: https://events.mcs.cmu.edu/qtc2021/
 
 ## Introduction
 The jupyter notebooks in this package depend on the following Python packages:
