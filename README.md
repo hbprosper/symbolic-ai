@@ -46,13 +46,16 @@ The __seq2seq_train.ipynb__ notebook does the following:
   1. Read a filtered text file and delimit each sequence of characters with a tab and a newline character.
   2. Build a character (i.e., token) to integer map for the input sequences and another for the target (that is, output) sequences.
   3. Use the maps to convert each sequence to an array of integers, where each integer corresponds to a unique character, and pad the sequences with spaces so that the sequences are of the same length. Do this separately for input and target sequences. (Padding is needed to simplify the use of *batches* during training.)
-  4. Create an Encoder, which performs the following tasks:
+  4. Create an __Encoder__, which performs the following tasks:
      1. Map each integer encoding of a token to a dense vector representation using the PyTorch __Embedding__ class.
      2. Call a stack of LSTMs keeping only the hidden and cell states.
+  5. Create a __Decoder__, which performs the following tasks:
+     1. Take in the first character (the tab) from an input sequence (of course, in batches :), plus the hidden and cell states from the Encoder.
+     2. Compute output, (hidden, cell).
+     3. From output determine the index for the predicted character, or use the target index with some probability (during training mode).
+     4. Go to 2 until output sequence is done.   
 
-__Encoder__
-  .1 Map 
-
+#### Using Google Colab
 ```python
 from google.colab import drive 
 drive.mount('/content/gdrive')
