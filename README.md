@@ -53,12 +53,14 @@ The __seq2seq_train.ipynb__ notebook does the following:
      1. Take in the first character (the tab) from an input sequence (of course, in batches :), plus the hidden and cell states from the Encoder.
      2. Compute output, (hidden, cell).
      3. From output determine the index for the predicted character, or use the target index with some probability (during training mode).
-     4. Go to 2 until output sequence is done.   
+     4. Go to *ii* until output sequence is done.   
 
 #### Using Google Colab
+If you wish to use Google Colab, you need the following cell at the start of your version of the notebook __seq2seq_train.ipynb__:
 ```python
 from google.colab import drive 
 drive.mount('/content/gdrive')
 import sys
 sys.path.append('/content/gdrive/My Drive/AI')
 ```
+This assumes that you have a Google account and you've created a folder called AI on your Google Drive. Follow the instructions on the screen. When you get to a website with a long cryptic code, click the button to the right of the code to copy the code and paste the code into the entry window that appears in the notebook. To make sure Python knows where to find modules (such seq2sequtil.py) add the full path of the folder AI to *sys.path*.
