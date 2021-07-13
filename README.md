@@ -39,14 +39,16 @@ sinh(-2*x)      -2*x - 4*x**3/3
 Since the data are already available, there is no need to call this notebook. The notebook __seq2seq_data_prep.ipynb__ applies some filtering to __data/seq2seq_data.txt__ and creates the filtered text files __data/seq2seq_data_10000.txt__ and __data/seq2seq_data_60000.txt__ in which all spaces in the expressions have been removed. The first file contains 10,000 sequence pairs and the second contains 60,000 sequence pairs.
 
 ### Training
-Launch the jupyter notebook __seq2seq_train.ipynb__ on a system with GPU support (e.g., Google Colaboratory). This notebook defines a sequence to sequence, that is, encoder/decoder model each built using two or more layers of a Long Short Term Memory (LSTM). An LSTM returns: __output, (hidden, cell)__, where, for a given sequence instance, output is a tensor of floats equal in size to the number of unique tokens from which the sequences are formed plus 2 for a padding and unknown character tokens, chosen to be a space and question mark, respectively. In spite of its suggestive name, which motivates the LSTM, this is just yet another very clever non-linear function. The notebook does the following:
+The symbolic translation model can be trained using the jupyter notebook __seq2seq_train.ipynb__, which should be run on a system with GPU support (e.g., Google Colaboratory). The notebook defines a sequence to sequence (seq2seq) model comprising a sequence encoder followed by a sequence decoder, each built using two or more layers of Long Short Term Memories (LSTM). An LSTM returns __output, (hidden, cell)__, where, for a given sequence, output is a tensor of floats equal in size to the number of unique tokens from which the sequences are formed plus 2. The extra length of 2 is for a 2 extra tokens, one for padding (a space) and another for an unknown character (a question mark). The objects __hidden__ and __cell__ are the so-called hidden and cell states, respectively, which provide encodings of the input sequence. In spite of its suggestive name an LSTM is just another very clever non-linear function that was developed by conceptualizing a device containing various filtering elements.
+
+The __seq2seq_train.ipynb__ notebook does the following:
 
   1. Read a filtered text file and delimit each sequence of characters with a tab and a newline character.
   2. Build a character (i.e., token) to integer map for the input sequences and another for the target (that is, output) sequences.
-  3. Use the maps to convert each sequence to an array of integers, with each integer corresponding to a unique character, and pad the sequences with spaces so that the sequences are of the same length. Do this separately for input and target sequences. (This is done to permit the use of *batches* during training.)
+  3. Use the maps to convert each sequence to an array of integers, where each integer corresponds to a unique character, and pad the sequences with spaces so that the sequences are of the same length. Do this separately for input and target sequences. (Padding is needed to simplify the use of *batches* during training.)
   4. Create an Encoder, which performs the following tasks:
      1. Map each integer encoding of a token to a dense vector representation using the PyTorch __Embedding__ class.
-     2. Call a stack of LSTMs,   
+     2. Call a stack of LSTMs keeping only the hidden and cell states.
 
 __Encoder__
   .1 Map 
