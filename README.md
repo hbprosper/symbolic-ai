@@ -45,7 +45,7 @@ The __seq2seq_train.ipynb__ notebook does the following:
 
   1. Read a filtered text file and delimit each sequence of characters with a tab and a newline character.
   2. Build a character (i.e., token) to integer map for the input sequences and another for the target (that is, output) sequences.
-  3. Use the maps to convert each sequence to an array of integers, where each integer corresponds to a unique character, and pad the sequences with spaces so that the sequences are of the same length. Do this separately for input and target sequences. (Padding is needed to simplify the use of *batches* during training.)
+  3. Use the maps to convert each sequence to an array of integers, where each integer corresponds to a unique character. We do not use padding.
   4. Create an __Encoder__, which performs the following tasks:
      1. Map each integer encoding of a token to a dense vector representation using the PyTorch __Embedding__ class.
      2. Call a stack of LSTMs keeping only the hidden and cell states.
